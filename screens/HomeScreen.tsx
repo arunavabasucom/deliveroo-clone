@@ -1,5 +1,5 @@
 import { View, Text, Image, TextInput, ScrollView } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   ChevronDownIcon,
@@ -10,13 +10,30 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import Catagories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
-
+import { sanityClient } from "../sanity";
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const [featuredCategories, setFeaturedCategories] = useState([]);
+
   /*when screen mounts it triggers*/
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
+    });
+  }, []);
+
+  /*fetching the data from backend*/
+  useEffect(() => {
+    const query = `*[_type=="featured"]{
+      ...,
+      restaurants[]->{
+        ...,
+        dishes[]->
+      }
+    }`;
+    sanityClient.fetch(query).then((data) => {
+      console.log(data);
+      setFeaturedCategories(data);
     });
   }, []);
 

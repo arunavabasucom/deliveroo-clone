@@ -1,8 +1,14 @@
-import { View, Text, ScrollView } from "react-native";
-import React from "react";
+import { ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
 import CategoryCard from "./CategoryCard";
+import { sanityClient } from "../sanity";
 
 const Catagories = () => {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const query = `*[_type=="category"]`;
+    sanityClient.fetch(query).then((data) => setCategories(data));
+  });
   return (
     <ScrollView
       horizontal
@@ -12,27 +18,15 @@ const Catagories = () => {
         paddingTop: 10,
       }}
     >
-      {/* CategoryCard */}
-      <CategoryCard
-        title="veg"
-        imgUrl="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1760&q=80"
-      />
-      <CategoryCard
-        title="veg"
-        imgUrl="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1760&q=80"
-      />
-      <CategoryCard
-        title="veg"
-        imgUrl="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1760&q=80"
-      />
-      <CategoryCard
-        title="veg"
-        imgUrl="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1760&q=80"
-      />
-      <CategoryCard
-        title="veg"
-        imgUrl="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1760&q=80"
-      />
+      {categories?.map((category: any) => {
+        return (
+          <CategoryCard
+            key={category._id}
+            title={category.name}
+            imgUrl={category.image}
+          />
+        );
+      })}
     </ScrollView>
   );
 };

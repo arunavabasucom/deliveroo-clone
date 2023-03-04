@@ -29,7 +29,7 @@ const FeaturedRow = ({ id, title, description }: FeaturedRowProps) => {
         setRestaurants(data?.restaurants);
       });
   }, []);
-  console.log(restaurants);
+
   return (
     <View>
       <View className="mt-4 flex-row items-center justify-between px-4">
@@ -45,7 +45,7 @@ const FeaturedRow = ({ id, title, description }: FeaturedRowProps) => {
         showsHorizontalScrollIndicator={false}
         className="pt-4"
       >
-        {restaurants?.map((restaurant:any) => {
+        {restaurants?.map((restaurant: any) => {
           return (
             <RestaurantCard
               key={restaurant._id}

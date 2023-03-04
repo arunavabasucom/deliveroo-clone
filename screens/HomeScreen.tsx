@@ -11,6 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Catagories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
 import { sanityClient } from "../sanity";
+import category from "../backend/schemas/category";
 const HomeScreen = () => {
   const navigation = useNavigation();
   const [featuredCategories, setFeaturedCategories] = useState([]);
@@ -32,11 +33,9 @@ const HomeScreen = () => {
       }
     }`;
     sanityClient.fetch(query).then((data) => {
-      console.log(data);
       setFeaturedCategories(data);
     });
   }, []);
-
   return (
     <SafeAreaView className="bg-white pt-5">
       {/* header */}
@@ -73,26 +72,21 @@ const HomeScreen = () => {
         }}
       >
         {/* Catagories */}
+
         <Catagories />
 
         {/* Featured row */}
-        <FeaturedRow
-          id={1}
-          title="Featured"
-          description="Paid placements from our partners"
-        />
-        {/* Tasty Discounts*/}
-        <FeaturedRow
-          id={2}
-          title="Tasty Discounts"
-          description="Everyone's been enjoying these tasty discounts"
-        />
-        {/* Offers near you*/}
-        <FeaturedRow
-          id={3}
-          title="Offers near you!"
-          description="Everyone's been enjoying these tasty discounts"
-        />
+        {featuredCategories?.map((category: category) => {
+
+          return (
+            <FeaturedRow
+              key={category._id}
+              id={category._id}
+              title={category.name}
+              description={category.short_description}
+            />
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );

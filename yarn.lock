@@ -1877,6 +1877,13 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.5.tgz#5f19d2b85a98e9558036f6a3cacc8819420f05cf"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
 
+"@types/react-currency-formatter@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@types/react-currency-formatter/-/react-currency-formatter-1.1.4.tgz#2078fdb52110c53d8ad50886f8a57c87c375a5e7"
+  integrity sha512-HhVJADdLzyuFumM8xdURGrS9cHWeS7f3RWYF4nPV4uaWfEtf48bLVRnE7/z8LiCXeF7rYJpT8rgOTpu7HLJU6A==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-native@~0.70.6":
   version "0.70.11"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.70.11.tgz#50c3d81e1351aac0562c3341c9bd57885651a2fe"

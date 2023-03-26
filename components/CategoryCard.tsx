@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { urlFor } from "../sanity";
 
+
+
 type CatalogCardProps = {
   imgUrl: string;
   title: string;

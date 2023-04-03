@@ -8,6 +8,8 @@ import {
 } from "../features/basketSlice";
 import { useNavigation } from "@react-navigation/native";
 
+
+
 const BasketIcon = () => {
   const items = useSelector(selectedBasketItems);
   const navigation = useNavigation();

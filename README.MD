@@ -1,6 +1,8 @@
 # Deliveroo Clone 
 
-![Gif of Deliveroo Clone](assets/deliveroo_clone_project.gif)
+<p align="center">
+  <img src="assets/deliveroo_clone_project.gif" alt="Gif of Deliveroo Clone" />
+</p>
 
 This is a React Native app that clones the popular food delivery app, **Deliveroo**. The app is built using the Tailwind CSS , providing a sleek and modern user interface. Users can browse through a variety of restaurants, view menus, and place orders for delivery.
 

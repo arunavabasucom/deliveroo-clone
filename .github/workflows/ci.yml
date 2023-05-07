@@ -2,8 +2,8 @@ name: preview
 on: pull_request
 
 jobs:
-  update:
-    name: EAS Update
+  perview:
+    name: perview
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -36,3 +36,27 @@ jobs:
         uses: expo/expo-github-action/preview@v8
         with:
           command: eas update --auto
+  build:
+    name: build 
+    runs-on: ubuntu-latest
+    steps:
+      - name:  Setup repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: yarn
+
+      - name:  Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build app
+        run: eas build --non-interactive --platform android

@@ -70,6 +70,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const { context, github } = require('@actions/github');
             console.log(payload);
             const prNumber = context.payload.pull_request?.number;
             const message = 'Hello! Thanks for opening this pull request!';

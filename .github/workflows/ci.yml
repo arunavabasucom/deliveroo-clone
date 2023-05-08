@@ -65,10 +65,17 @@ jobs:
       - id: step1
         name: Step 1
         run: echo "test=hello" >> $GITHUB_OUTPUT
-      - name: Update Pull Request
-        uses: JoseThen/comment-pr@v1.1.1
-        env:
-         PLAN: "\n${{needs.job1.outputs.output1}}"
+      - name: Create PR Comment
+        uses: actions/github-script@v4
         with:
-          comment: 'This PR is the bees knees!'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { context, github } = require('@actions/github');
+            const prNumber = context.payload.pull_request.number;
+            const message = 'Hello! Thanks for opening this pull request!';
+            github.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: message
+            });

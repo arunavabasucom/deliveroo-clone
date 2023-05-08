@@ -73,6 +73,8 @@ jobs:
           echo $MY_VAR
       - name: Create comment
         uses: thollander/actions-comment-pull-request@v2
+        env:
+          MY_VAR: "Hello, World!"
         with:
           message: 'The value of MY_VAR is: ${{ env.MY_VAR }}'
           

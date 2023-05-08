@@ -68,7 +68,9 @@ jobs:
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v3
         id: couc
+      
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: 1
           body: |
             My comment

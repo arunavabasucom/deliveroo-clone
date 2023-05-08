@@ -66,16 +66,9 @@ jobs:
         name: Step 1
         run: echo "test=hello" >> $GITHUB_OUTPUT
       - name: Update Pull Request
-        uses: actions/github-script@v5
+        uses: github-actions-up-and-running/pr-comment@v1.0.0
         env:
          PLAN: "\n${{needs.job1.outputs.output1}}"
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-           const output = `hi`;
-           github.rest.issues.createComment({
-             issue_number: ${{ github.event.inputs.PR_number }},
-             owner: context.repo.owner,
-             repo: context.repo.repo,
-             body: output
-           })
+         repo-token: ${{ secrets.GITHUB_TOKEN }}
+         message: Nice PR!👍

@@ -65,18 +65,13 @@ jobs:
       - id: step1
         name: Step 1
         run: echo "test=hello" >> $GITHUB_OUTPUT
-      - name: Create PR Comment
-        uses: actions/github-script@v6
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v3
+        id: couc
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { context, github } = require('@actions/github');
-            console.log(payload);
-            const prNumber = context.payload.pull_request?.number;
-            const message = 'Hello! Thanks for opening this pull request!';
-            github.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber,
-              body: message
-            });
+          issue-number: 1
+          body: |
+            My comment
+      - name: Check outputs
+        run: |
+          echo "Comment ID - ${{ steps.couc.outputs.comment-id }}"

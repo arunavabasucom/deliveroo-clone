@@ -60,22 +60,20 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      # - name: Build app
-      #   run: eas build --non-interactive --platform android
-      - id: step1
-        name: Step 1
-        run: echo "test=hello" >> $GITHUB_OUTPUT
-          
-      - name: Print environment variable
-        env:
-          MY_VAR: "Hello, World!"
+      - name: Build app
+        run: eas build --non-interactive --platform android > eas-build.log 2>&1
+      
+      - name: Set build app output
         run: |
-          echo $MY_VAR
+           echo "$(cat eas-build.log)" >> build_app_output.txt
+           echo "BUILD_APP_OUTPUT=$(< build_app_output.txt)" >> $GITHUB_ENV
+      
+        
       - name: Create comment
         uses: thollander/actions-comment-pull-request@v2
         env:
           MY_VAR: "Hello, World!"
         with:
-          message: 'The value of MY_VAR is: ${{ env.MY_VAR }}'
+          message: 'The value of MY_VAR is: ${{ env.BUILD_APP_OUTPUT}}'
           
       

@@ -65,15 +65,15 @@ jobs:
       - id: step1
         name: Step 1
         run: echo "test=hello" >> $GITHUB_OUTPUT
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v3
-        id: couc
-      
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: 1
-          body: |
-            My comment
-      - name: Check outputs
+          
+      - name: Print environment variable
+        env:
+          MY_VAR: "Hello, World!"
         run: |
-          echo "Comment ID - ${{ steps.couc.outputs.comment-id }}"
+          echo $MY_VAR
+      - name: Create comment
+        uses: peter-evans/github-comment@v3
+        with:
+          body: 'The value of MY_VAR is: ${{ env.MY_VAR }}'
+          
+      

@@ -72,8 +72,8 @@ jobs:
         run: |
           echo $MY_VAR
       - name: Create comment
-        uses: peter-evans/create-or-update-comment@v3
+        uses: thollander/actions-comment-pull-request@v2
         with:
-          body: 'The value of MY_VAR is: ${{ env.MY_VAR }}'
+          message: 'The value of MY_VAR is: ${{ env.MY_VAR }}'
           
       

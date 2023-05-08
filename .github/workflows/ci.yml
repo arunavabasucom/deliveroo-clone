@@ -66,9 +66,9 @@ jobs:
         name: Step 1
         run: echo "test=hello" >> $GITHUB_OUTPUT
       - name: Update Pull Request
-        uses: github-actions-up-and-running/pr-comment@v1.0.0
+        uses: JoseThen/comment-pr@v1.1.1
         env:
          PLAN: "\n${{needs.job1.outputs.output1}}"
         with:
-         repo-token: ${{ secrets.GITHUB_TOKEN }}
-         message: Nice PR!👍
+          comment: 'This PR is the bees knees!'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

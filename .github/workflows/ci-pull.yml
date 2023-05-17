@@ -67,6 +67,6 @@ jobs:
               cat store.ts >> "$GITHUB_ENV"
               echo "$EOF" >> "$GITHUB_ENV"
       - name: Create comment
-        run: gh pr comment ${{ github.event.pull_request.number }} --body "${{ env.action_state }}"
+        run: gh pr comment ${{ github.event.pull_request.number }} --body "```${{ env.action_state }}```"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

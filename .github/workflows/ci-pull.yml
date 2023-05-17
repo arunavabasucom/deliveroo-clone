@@ -61,8 +61,8 @@ jobs:
         run: yarn install
 
       - name: Build apk
-        run: cat README.MD
+        run: cat README.MD >> "$GITHUB_ENV"
       - name: Create comment
-        run: gh pr comment ${{ github.event.pull_request.number }} --body "Thank you for opening this pull request!"
+        run: gh pr comment ${{ github.event.pull_request.number }} --body "${{ env.action_state }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

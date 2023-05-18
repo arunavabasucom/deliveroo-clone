@@ -11,7 +11,7 @@ jobs:
       - name: Check for EXPO_TOKEN
         run: |
           if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
-            echo "You must provide an EXPO_TOKEN secret linked to this project's Expo account in this repo's secrets. Learn more: https://docs.expo.dev/eas-update/github-actions"
+            echo "You must provide an EXPO_TOKEN secret"
             exit 1
           fi
       - name: Checkout repository
@@ -63,10 +63,10 @@ jobs:
       - name: Build apk
         run: |
               EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-              echo "action_state<<$EOF" >> "$GITHUB_ENV"
+              echo "action_state<<$EOF" >> "$GITHUB_ENV" 
               eas build --platform android --non-interactive --profile development >> "$GITHUB_ENV"
               echo "$EOF" >> "$GITHUB_ENV"
       - name: Create comment
-        run: gh pr comment ${{ github.event.pull_request.number }} --body "\`\`\`\n ${{ env.action_state }}\`\`\`"
+        run: gh pr comment ${{ github.event.pull_request.number }} --body "App is cooked pls take a look \n \`\`\`\n ${{ env.action_state }}\`\`\`"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

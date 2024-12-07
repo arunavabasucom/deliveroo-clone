@@ -1,14 +1,14 @@
 {
   "cli": {
-    "version": ">= 3.8.1"
+    "version": ">= 3.8.1",
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
       "distribution": "internal",
       "android": {
-        "buildType": "apk" 
+        "buildType": "apk"
       }
-    
     },
     "production": {}
   },
